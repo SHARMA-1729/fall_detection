@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.json());
 
 // 💾 Database Connection
@@ -12,7 +15,11 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // 📌 Routes
 const userRoutes = require("./routes/user.routes");
+const fallRoutes = require('./routes/fallRoutes');
+const alertRoutes = require('./routes/alert.routes');
 app.use("/api/users", userRoutes);
+app.use('/api/falls', fallRoutes);
+app.use('/api', alertRoutes);  // POST /api/alert
 
 // 🔥 Start Server
 const PORT = process.env.PORT || 5002;
@@ -21,27 +28,3 @@ app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 
 
-const FallEvent = require("./models/falldetection.model");
-
-async function testInsert() {
-    const newFall = new FallEvent({
-        user_id: "650b45f8a2c4a5f3d8e4a6b2", // Replace with an actual user ID
-        location: "Living Room",
-        impact_severity: "Hard",
-        activity_before_fall: "Walking",
-        user_response: "Unconscious",
-        fall_confirmed: true,
-        sensor_data: {
-            accelerometer: { x: 0.5, y: 1.2, z: 0.3 },
-            gyroscope: { x: 0.1, y: 0.2, z: 0.3 },
-            barometer: 1013,
-            heart_rate: 72,
-            spo2: 98
-        }
-    });
-
-    await newFall.save();
-    console.log("✅ Test fall event inserted");
-}
-
-testInsert();

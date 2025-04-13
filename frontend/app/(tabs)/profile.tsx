@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { HomeScreen } from "../../components/HomeScreen"
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 const userData = {

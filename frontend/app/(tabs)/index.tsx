@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+// import { HomeScreen } from ""
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const currentDevice = 'Band 002 - Grandpa’s Tracker';
@@ -15,7 +16,7 @@ const sensorData = {
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Fall Detection Dashboard</Text>
+      <Text style={styles.header}>Fall Detection Dashboard</Text>``
 
       <View
         style={[
